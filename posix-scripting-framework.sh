@@ -21,12 +21,12 @@ log(){
   t="$(getTime)"
   if [ "${PSF_COLOR}" = "YES" ]; then
     local NC='\033[0m' 				  	# No Color
-    local Red='\033[0;31m'
+    local Red='\033[1;31m'
     local Green="\033[0;32m"
     local Yellow="\033[0;33m"
-    local Orange="\033[1;35m"
-    local Blue="\033[0;34m"
-    local Cyan="\033[0;36m"
+    local Magenta="\033[1;35m"
+    local Blue="\033[1;34m"
+    local Cyan="\033[1;36m"
     # not all terminals supports color
     # if not, do not use them :)
     # shellcheck disable=SC3037
@@ -37,14 +37,10 @@ log(){
       lvlColor="${Red}"
     else
       if [ "${lvl}" = "W" ]; then
-        lvlColor="${Orange}"
+        lvlColor="${Magenta}"
       else
         if [ "${lvl}" = "D" ]; then
           lvlColor="${Blue}"
-        else
-          if [ "${lvl}" = "W" ]; then
-            lvlColor="${Blue}"
-          fi
         fi
       fi
     fi
