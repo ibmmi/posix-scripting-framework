@@ -9,6 +9,7 @@
 init(){
   export PSF_COLOR="${PSF_COLOR:-'NO'}"
   export PSF_DEBUG="${PSF_DEBUG:-'NO'}"
+  export PSF_PFX="${PSF_PFX:-PFX:}"
 }
 
 log(){
@@ -17,7 +18,6 @@ log(){
   # $2 - log level, optional. Default "I"
   local lvl="${2:-I}"
   local t
-  local psfPfx="PSF:"
   t="$(getTime)"
   if [ "${PSF_COLOR}" = "YES" ]; then
     local NC='\033[0m' 				  	# No Color
@@ -27,10 +27,6 @@ log(){
     local Magenta="\033[1;35m"
     local Blue="\033[1;34m"
     local Cyan="\033[1;36m"
-    # not all terminals supports color
-    # if not, do not use them :)
-    # shellcheck disable=SC3037
-    psfPfx="${Green}PSF:"
 
     local lvlColor="${Cyan}"
     if [ "${lvl}" = "E" ]; then
@@ -44,12 +40,15 @@ log(){
         fi
       fi
     fi
+
+    # not all terminals supports color
+    # if not, do not use them :)
     # shellcheck disable=SC3037
-    echo -e "${Yellow}${t}${lvlColor}${lvl}${Yellow}|${psfPfx}${NC}$1"
+    echo -e "${Yellow}${t}${lvlColor}${lvl}${Yellow}|${Green}${PSF_PFX}${NC}$1"
   else
-    echo "${t}${lvl}|${psfPfx}$1"
+    echo "${t}${lvl}|${PSF_PFX}$1"
   fi
-  echo "${t}${lvl}|${psfPfx}$1" >> "${PSF_AUDIT_SSN_DIR}/session.log"
+  echo "${t}${lvl}|${PSF_PFX}$1" >> "${PSF_AUDIT_SSN_DIR}/session.log"
 }
 
 logI(){
