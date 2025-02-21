@@ -1,0 +1,36 @@
+{
+    "name": "psf-dev-alpine",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "__uname": "vscode",
+            "__gname": "vscode"
+        }
+    },
+    "remoteEnv": {
+        "CONTAINER_WORKSPACE_FOLDER": "${containerWorkspaceFolder}"
+    },
+    "postCreateCommand": "git config --global --add safe.directory \"${CONTAINER_WORKSPACE_FOLDER}\" ",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "davidanson.vscode-markdownlint",
+                "dotenv.dotenv-vscode",
+                "eamodio.gitlens",
+                "mervin.markdown-formatter",
+                "mhutchie.git-graph",
+                "oderwat.indent-rainbow",
+                "streetsidesoftware.code-spell-checker",
+                "timonwong.shellcheck",
+                "yzhang.markdown-all-in-one"
+            ]
+        }
+    },
+    "runArgs": [
+        "--rm",
+        "--hostname",
+        "psf-dev-alpine",
+        "--name",
+        "psf-dev-alpine"
+    ]
+}
